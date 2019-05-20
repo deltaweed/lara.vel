@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Profile\Http\Requests;
+namespace Werneckbh\Profile\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;

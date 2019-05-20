@@ -24,9 +24,9 @@ class UserStoreFormRequest extends BaseFormRequest
     public function rules()
     {
         return [
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'email' => 'required|email|unique:users',
             'name' => 'required|string|max:50',
-            'password' => 'required|string|min:8'
+            'password' => 'required|min:8'
         ];
     }
 

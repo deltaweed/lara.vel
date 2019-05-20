@@ -2825,16 +2825,16 @@
         },
         {
             "name": "waavi/sanitizer",
-            "version": "1.0.11",
+            "version": "1.0.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Waavi/Sanitizer.git",
-                "reference": "ab12ea90dcaae937dcce9970abb30dbfe9e35b78"
+                "reference": "d978b8f90de7a6ea40714b17fac0b1f59498f64f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Waavi/Sanitizer/zipball/ab12ea90dcaae937dcce9970abb30dbfe9e35b78",
-                "reference": "ab12ea90dcaae937dcce9970abb30dbfe9e35b78",
+                "url": "https://api.github.com/repos/Waavi/Sanitizer/zipball/d978b8f90de7a6ea40714b17fac0b1f59498f64f",
+                "reference": "d978b8f90de7a6ea40714b17fac0b1f59498f64f",
                 "shasum": ""
             },
             "require": {
@@ -2881,7 +2881,7 @@
                 "sanitation",
                 "transform input"
             ],
-            "time": "2019-04-25T13:11:15+00:00"
+            "time": "2019-02-19T13:49:49+00:00"
         }
     ],
     "packages-dev": [

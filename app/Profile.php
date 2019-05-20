@@ -11,9 +11,9 @@ class Profile extends Model
         'last_name',
         'location',
         'bio',
-        ];
+    ];
 
-        public function user()
+    public function user()
     {
         return $this->belongsTo('App\User');
     }
