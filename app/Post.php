@@ -27,14 +27,14 @@ class Post extends Model
         ];
     }
 
-    protected $perPage = 25; 
-    
+    protected $perPage = 25;
+
     protected $dates = ['created_at', 'deleted_at']; // which fields will be Carbon-ized
-    
+
     protected $fillable = [
             'title', 'content', 'status', 'category_id', 'user_id', 'visited'
     ];
-    
+
         /**
          * Scope a query to only include posts of a given type.
          *
@@ -42,12 +42,12 @@ class Post extends Model
          * @param  mixed $type
          * @return \Illuminate\Database\Eloquent\Builder
          */
-    
+
         static function scopeStatus($query, $status)
         {
             return $query->where('status', $status);
         }
-        
+
         // protected static function boot()
         // {
         //     parent::boot();
@@ -55,10 +55,27 @@ class Post extends Model
         //         $builder->orderBy('title', 'asc');
         //     });
         // }
-    
+
         protected static function boot()
         {
             parent::boot();
             static::addGlobalScope(new TitleScope);
         }
+
+        public function category()
+        {
+       return $this->belongsTo('App\Category');
+        }
+
+        public function user()
+        {
+       return $this->belongsTo('App\User');
+        }
+        public function tags()
+        {
+            return $this->belongsToMany(Tag::class);
+        }
+
+
+
 }

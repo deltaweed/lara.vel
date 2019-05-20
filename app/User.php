@@ -53,7 +53,7 @@ class User extends Authenticatable
 
     public static function scopeTrash($query, $id)
     {
-        return $query->withTrashed()->where('id', $id)->first();       
+        return $query->withTrashed()->where('id', $id)->first();
     }
 
     public function setPasswordAttribute($input)
@@ -61,4 +61,16 @@ class User extends Authenticatable
         if ($input)
             $this->attributes['password'] = app('hash')->needsRehash($input) ? Hash::make($input) : $input;
     }
+
+    public function posts()
+   {
+       return $this->hasMany(Post::class);
+   }
+
+   public function profile()
+   {
+       return $this->hasOne('App\Profile');
+   }
+
+
 }

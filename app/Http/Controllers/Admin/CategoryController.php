@@ -18,7 +18,7 @@ class CategoryController extends Controller
     public function index()
     {
         $categories = Category::latest()->paginate(15);
-        return view('admin.categories.index', compact('categories'));
+        return view('admin.categories.index', compact('categories')); 
     }
 
     /**
@@ -40,7 +40,7 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'name' => 'required|unique:categories|max:255|min:3',
+            'name' => 'required|unique:categories|max:255',
             'description' => 'nullable|string',
         ]);
         Category::create($request->all());
@@ -84,14 +84,14 @@ class CategoryController extends Controller
             'name' => 'required|unique:categories|max:255|min:3',
             'description' => 'nullable|string',
         ]);
-
+        
         // $validator = Validator::make($request->all(), [
-        //     'name' => 'required|unique:categories|max:255|min:3',
+        //     'name' => 'required|unique:categories|max:255',
         //     'description' => 'nullable|string',
         // ])->validate();
 
         if ($validator->fails()) {
-            return redirect("admin/categories/$category->id/edit")
+            return redirect('admin/categories/create')
                         ->withErrors($validator)
                         ->withInput();
         }

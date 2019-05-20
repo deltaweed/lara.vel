@@ -23,6 +23,12 @@ Route::get('contact-us', 'ContactController@index')->name('contact');
 Route::get('blog', 'PostController@index');
 Route::get('blog/{slug}', 'PostController@show')->name('blog.show');
 
+Route::prefix('blog')->group(function () {
+    Route::get('', 'PostController@index');
+    Route::get('{slug}', 'PostController@show')->name('blog.show');
+    Route::get('category/{id}', 'PostController@getPostsByCategory')->name('blog.category');
+});
+
 // admin
 
 Route::prefix('admin')->group(function () {
@@ -32,6 +38,7 @@ Route::prefix('admin')->group(function () {
     Route::resource('posts', 'Admin\PostController');
     Route::resource('categories', 'Admin\CategoryController');
     Route::resource('users', 'Admin\UserController');
+    Route::resource('tags', 'Admin\TagController');
     Route::get('trashed', 'Admin\UserController@trashed')->name('users.trashed');
     Route::delete('user-destroy/{id}', 'Admin\UserController@userDestroy')->name('user.force.destroy');
     Route::post('restore/{id}', 'Admin\UserController@restore')->name('users.restore');
@@ -51,6 +58,23 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/session', 'HomeController@showRequest')->name('session');
+// Route::get('/session', 'HomeController@showRequest')->name('session');
 
 Route::view('/writer', 'staff.writer')->middleware('auth');
+
+Route::middleware('web')->group(function () {
+    Route::middleware('auth')->prefix('profile')->group(function () {
+        Route::get('', 'ProfileController@index')
+            ->name('profile');
+        Route::put('information', 'ProfileController@store')
+            ->name('profile.info.store');
+        Route::get('security', 'ProfileController@showPasswordForm')
+            ->name('profile.security');
+        Route::put('security', 'ProfileController@storePassword')
+            ->name('profile.security.store');
+        Route::get('delete-account', 'ProfileController@showDeleteAccountConfirmation')
+            ->name('profile.delete.show');
+        Route::delete('delete-account', 'ProfileController@deleteAccount')
+            ->name('profile.remove');
+    });
+});

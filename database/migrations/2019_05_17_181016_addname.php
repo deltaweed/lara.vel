@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTagsTable extends Migration
+class Addname extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,9 @@ class CreateTagsTable extends Migration
      */
     public function up()
     {
-        Schema::create('tags', function (Blueprint $table) {
-            $table->bigIncrements('id');
+        Schema::table('tags', function (Blueprint $table) {
             $table->string('name');
             $table->string('slug')->unique();
-            $table->timestamps();
         });
     }
 
@@ -28,6 +26,8 @@ class CreateTagsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tags');
+        Schema::table('tags', function (Blueprint $table) {
+            //
+        });
     }
 }
