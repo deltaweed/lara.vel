@@ -78,3 +78,39 @@ Route::middleware('web')->group(function () {
             ->name('profile.remove');
     });
 });
+
+use Illuminate\Support\Facades\Log;
+
+Route::get('/test-log', function () {
+    Log::info('This is an info message that someone has arrived at the welcome page.');
+    // Log::channel('slack')->info('This is an informative Slack message.');
+
+    // Log::stack(['single', 'stderr'])->critical('I need ice-cream!');
+
+    // Log::alert('This page was loaded', ['user' => 3, 'previous_page' => 'www.google.com']);
+
+    // Log::emergency($message);
+    // Log::alert($message);
+    // Log::critical($message);
+    // Log::error($message);
+    // Log::warning($message);
+    // Log::notice($message);
+    // Log::info($message);
+    // Log::debug($message);
+
+    return '<h1>Welcome back User</h1>';
+});
+
+Route::get('/reminder', function () {
+    // return new App\Mail\Reminder();
+    return new App\Mail\Reminder('Blahamuha');
+
+});
+
+use Illuminate\Support\Facades\Mail;
+use App\Mail\Reminder;
+
+Route::get('/send-test', function () {
+    Mail::to('kuku@my.cat')->send(new Reminder('Blahamuha'));
+    return 'Email was sent';
+});
