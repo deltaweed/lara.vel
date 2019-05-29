@@ -38,8 +38,6 @@ Route::prefix('blog')->group(function () {
 
 Route::middleware('web')->group(function () {
     Route::middleware('auth:admin')->prefix('admin')->group(function () {
-    // Route::group(function () {
-        // Route::prefix('admin')->group(function () {
         Route::get('', 'Admin\DashboardController');
         Route::get('status', 'Admin\PostController@getPostsByStatus')->name('posts.status');
         Route::get('sort', 'Admin\PostController@sortPostsByDate')->name('posts.sort');
@@ -49,6 +47,8 @@ Route::middleware('web')->group(function () {
         Route::resource('users', 'Admin\UserController');
         Route::resource('admins', 'Admin\AdminsController');
         Route::resource('writers', 'Admin\WritersController');
+        Route::resource('permissions', 'Admin\PermissionController');
+        Route::resource('roles', 'Admin\RoleController');
         Route::get('trashed', 'Admin\UserController@trashed')->name('users.trashed');
         Route::get('trashed-admins', 'Admin\AdminsController@trashed')->name('admins.trashed');
         Route::get('trashed-writers', 'Admin\WritersController@trashed')->name('writers.trashed');
@@ -118,4 +118,4 @@ Route::get('social/{provider}/callback', 'Auth\SocialController@callback')->name
 // Feedback
 Route::get('/feedback', 'FeedbackController@create');
 Route::post('/feedback/create', 'FeedbackController@store');
-
+// Route::get('test', 'GadgetTestController@index');
