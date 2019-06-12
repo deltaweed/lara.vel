@@ -17,14 +17,24 @@ class PostController extends Controller
      * @return Response
      */
 
-    public function index()   
-    {
-        $posts = Post::where([
-            'status' => StatusType::Published, 
+    // public function index()
+    // {
+    //     $posts = Post::where([
+    //         'status' => StatusType::Published,
+    //         ])
+    //         ->with('category')
+    //         ->orderBy('updated_at', 'desc')
+    //         ->paginate(5);
+    //     return view('blog.index')->with(compact('posts'))->withTitle('Awesome Blog');
+    // }
+    public function index() {
+        $posts = Post::withCount('comments')
+            ->where([
+            'status' => StatusType::Published,
             ])
             ->with('category')
             ->orderBy('updated_at', 'desc')
-            ->paginate(5);
+            ->simplePaginate(5);
         return view('blog.index')->with(compact('posts'))->withTitle('Awesome Blog');
     }
 
@@ -34,7 +44,7 @@ class PostController extends Controller
             $post = Post::findOrFail($slug);
             return Redirect::to(route('blog.show', $post->slug), 301);
         }
-        
+
         $post = Post::whereSlug($slug)->firstOrFail();
         $post->update(['visited'=>$post->visited+1]);
         return view('blog.show', ['post' => $post, 'hescomment'=>true]);
@@ -42,7 +52,7 @@ class PostController extends Controller
 
     public function getPostsByCategory($categoryId)   {
         $posts = Post::where([
-                        'status' => StatusType::Published, 
+                        'status' => StatusType::Published,
                         'category_id' => $categoryId
                     ])
                     ->with('category')
