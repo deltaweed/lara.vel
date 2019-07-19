@@ -15,4 +15,8 @@ class Category extends Model
         return $this->hasMany(Post::class);
     }
 
+    public function parent()
+    {
+        return $this->belongsTo(self::class);
+    }
 }

@@ -119,3 +119,18 @@ Route::get('social/{provider}/callback', 'Auth\SocialController@callback')->name
 Route::get('/feedback', 'FeedbackController@create');
 Route::post('/feedback/create', 'FeedbackController@store');
 // Route::get('test', 'GadgetTestController@index');
+
+
+// Route::get('vue', function () {
+//     return view('vue');
+// });
+
+Route::post(
+    'post/{id}/comment',
+    function ($id, Request $request) {
+        $user = \Auth::user();
+        // dump($request);
+        \App\Post::findOrFail($id)->comment($request->all(), $user);
+        return response()->json([$request->all()]);
+    }
+);

@@ -89,4 +89,5 @@ return [
         'client_secret' => env('37SIGNALS_SECRET'),
         'redirect'      => env('37SIGNALS_REDIRECT_URI'),
     ],
+
 ];
