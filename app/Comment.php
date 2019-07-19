@@ -20,7 +20,7 @@ class Comment extends Model
    **/
 
    public function creator(): MorphTo {
-    return $this->morphTo('creator');
-}
+        return $this->morphTo('creator');
+    }
 
 }
